@@ -1,0 +1,11 @@
+-pagination can_Prev,Can_Next
+-ActivityUserAnnonce
+-iduser remplacer par le user venu du token
+--insertion annonce + verification si cette voiture est a celle qui publie
+--ajout endpoint @ UserMirControler ---> getMesAnnoncesFavoris
+--changement en statu 201 si data est null
+--nanova view annonce detail : nanampy nbfavoris (annoncebody sy annoncedetail)
+--nanampy modelsMi_v et marqueMi et modelsMi ,rep,ser,getModelsParMarques @ controller
+--nanampy fonction getbyidmarque an'le marquemodels de ao @ controller
+--endpoint getVoitureInfoByIduser
+--endpoint getLieux
