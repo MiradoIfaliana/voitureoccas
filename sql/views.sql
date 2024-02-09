@@ -52,6 +52,14 @@ create or replace view activityuserannonce_v as
             left join annonce as av on (av.idvoitureinfo=v.idvoitureinfo and av.etat=10 and av.statusvente=0)
             left join annoncefavoris as af on (af.iduser=u.iduser)
             group by u.iduser;
+            
+create or replace view models_v as 
+      select mq.idmarque,mq.nommarque,md.idmodel,md.nommodel,md.datesortie,md.vitesse,t.idtransmission,t.nomtransmission,c.idcarburant,c.nomcarburant
+      from models as md 
+      join marque as mq on md.idmarque=mq.idmarque
+      join transmission as t on t.idtransmission=md.idtransmission
+      join carburant as c on c.idcarburant=md.idcarburant;
+
 
 ---statusvente : 0 : vendu /10 : non vendu
 ---etat : 0:encour demande / 10 :accepter / 20: refuser

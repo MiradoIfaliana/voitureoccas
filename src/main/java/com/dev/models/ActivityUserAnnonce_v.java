@@ -2,13 +2,13 @@ package com.dev.models;
 
 public class ActivityUserAnnonce_v {
     int iduser;
-    int nbannonce;
-    int nbvendu;
-    int nbfavoris;
+    double nbannonce;
+    double nbvendu;
+    double nbfavoris;
     
     public ActivityUserAnnonce_v() {
     }
-    public ActivityUserAnnonce_v(int iduser, int nbannonce, int nbvendu, int nbfavoris) {
+    public ActivityUserAnnonce_v(int iduser, double nbannonce, double nbvendu, double nbfavoris) {
         this.iduser = iduser;
         this.nbannonce = nbannonce;
         this.nbvendu = nbvendu;
@@ -20,22 +20,22 @@ public class ActivityUserAnnonce_v {
     public void setIduser(int iduser) {
         this.iduser = iduser;
     }
-    public int getNbannonce() {
+    public double getNbannonce() {
         return nbannonce;
     }
-    public void setNbannonce(int nbannonce) {
+    public void setNbannonce(double nbannonce) {
         this.nbannonce = nbannonce;
     }
-    public int getNbvendu() {
+    public double getNbvendu() {
         return nbvendu;
     }
-    public void setNbvendu(int nbvendu) {
+    public void setNbvendu(double nbvendu) {
         this.nbvendu = nbvendu;
     }
-    public int getNbfavoris() {
+    public double getNbfavoris() {
         return nbfavoris;
     }
-    public void setNbfavoris(int nbfavoris) {
+    public void setNbfavoris(double nbfavoris) {
         this.nbfavoris = nbfavoris;
     }
     

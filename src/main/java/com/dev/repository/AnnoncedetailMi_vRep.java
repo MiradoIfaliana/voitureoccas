@@ -36,10 +36,9 @@ public class AnnoncedetailMi_vRep  {
         return executerRequeteNative(query);
     }
     public List<AnnoncedetailMi_v> getFavorisByIduser(int iduser, int nbaffiche, int numlineBeforeFirst) {
-        String query="select ad_v.*, COALESCE(af.idannoncefavoris,0) as idannoncefavoris from annoncedetail_v as ad_v "+
-        "join annoncefavoris as af on (ad_v.idannonce=af.idannonce and af.iduser= "+iduser+") "+
-        "join (select * from annoncenbrepeat_v where iduser= "+iduser+" LIMIT "+nbaffiche+" OFFSET "+numlineBeforeFirst+") as ar_v on ad_v.idannonce=ar_v.idannonce "+
-        "order by ad_v.idannonce ASC,ad_v.idcategorie ASC,ad_v.idannoncephoto ASC,ad_v.dateannonce ASC ";
+        String query="select ad_v.*, ar_v.idannoncefavoris from annoncedetail_v as ad_v "+
+        "join (select * from annoncefavoris where iduser="+iduser+" LIMIT "+nbaffiche+" OFFSET "+numlineBeforeFirst+") as ar_v on ad_v.idannonce=ar_v.idannonce "+
+        "order by ad_v.idannonce ASC,ad_v.idcategorie ASC,ad_v.idannoncephoto ASC,ad_v.dateannonce ASC";
         return executerRequeteNative(query);
     }
     public List<AnnoncedetailMi_v> getEncours(int nbaffiche, int numlineBeforeFirst) {
