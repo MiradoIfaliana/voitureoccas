@@ -32,7 +32,9 @@ import com.dev.service.CreditersoldeuserMiSer;
 import com.dev.service.LieuMiSer;
 import com.dev.service.ModelsMi_vSer;
 import com.dev.service.SoldeuserMiSer;
+import com.dev.service.UserAppTokenSer;
 import com.dev.service.UserService;
+import com.dev.service.Codecredit_vMiSer;
 
 @RestController
 @CrossOrigin(origins = "*")
@@ -58,6 +60,10 @@ public class UserMirController {
     private ModelsMi_vSer modelsMi_vSer;
     @Autowired
     private LieuMiSer lieuMiSer;
+    @Autowired 
+    private UserAppTokenSer userAppTokenSer;
+    @Autowired
+    private Codecredit_vMiSer codecredit_vMiSer;
 
     private final UserService userService;
     private final JwtService jwtService;
@@ -199,7 +205,7 @@ public class UserMirController {
 
     //Mandeha  
     @GetMapping(path="/getPubAnnonces",produces = "application/json") //ok
-    public Hashtable<String,Object> getPubAnnoces( @RequestParam int iduser,@RequestParam int nbaffiche,@RequestParam int numlinebeforefirst) {
+    public Hashtable<String,Object> getPubAnnoces(@RequestParam int iduser,@RequestParam int nbaffiche,@RequestParam int numlinebeforefirst) {
         Hashtable <String,Object> response=new Hashtable<>();
         try{
             List<AnnoncedetailMi_v> lstA= annoncedetailMi_vSer.getAllByNotIduserByNbafficheByNumlineBeforFirst(iduser, nbaffiche, numlinebeforefirst);
@@ -489,5 +495,79 @@ public class UserMirController {
             response.put("message",e.getMessage());
         }
         return response; 
+    }
+    @PostMapping("/usertokenAndTokenAppareil")//ok
+    public Hashtable <String,Object> usertokenAndTokenAppareil( @RequestHeader Map<String, String> headers,@RequestBody TokenBody token) {
+        Hashtable <String,Object> response=new Hashtable<>(); 
+        try{
+            String email= jwtService.extractUserMail(headers.get("authorization").substring(7));
+            User user=userService.findByEmail(email).get();
+            userAppTokenSer.VerifeSave(user.getId(), token.getNotiftoken());
+            response.put("status",200);
+            response.put("message","succes");
+        }
+        catch (Exception e){
+            e.printStackTrace();
+            response.put("status",500);
+            response.put("message",e.getMessage());
+        }
+        return response; 
+    }
+    @PostMapping("/usertokenAndTokenAppareilUpdate")//ok
+    public Hashtable <String,Object> usertokenAndTokenAppareilUpdate( @RequestHeader Map<String, String> headers,@RequestBody TokenBody token) {
+        Hashtable <String,Object> response=new Hashtable<>(); 
+        try{
+            String email= jwtService.extractUserMail(headers.get("authorization").substring(7));
+            User user=userService.findByEmail(email).get();
+            userAppTokenSer.saveToNoDispo(user.getId(), token.getNotiftoken());
+            response.put("status",200);
+            response.put("message","succes");
+        }
+        catch (Exception e){
+            e.printStackTrace();
+            response.put("status",500);
+            response.put("message",e.getMessage());
+        }
+        return response; 
+    }
+    @GetMapping("getAllCodeCredit")
+    public Hashtable <String,Object> getAllCodeCredit() {
+        Hashtable <String,Object> response=new Hashtable<>(); 
+        try{
+            List<Codecredit_vMi> data=codecredit_vMiSer.getAll();
+            response.put("message","ok");
+            if(data!=null){
+                response.put("status",200);
+                response.put("data",data);
+            }else{
+                response.put("status",201);
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+            response.put("status",500);
+            response.put("message",e.getMessage());
+        }
+        return response;
+    }
+    @GetMapping("getSoldeOfUser")
+    public Hashtable <String,Object> getSoldeOfUser(@RequestHeader Map<String, String> headers) {
+        Hashtable <String,Object> response=new Hashtable<>(); 
+        try{
+            String email= jwtService.extractUserMail(headers.get("authorization").substring(7));
+            User user=userService.findByEmail(email).get();
+            SoldeuserMi data=soldeuserMiSer.getSoldeByIduser(user.getId());
+            response.put("message","ok");
+            if(data!=null){
+                response.put("status",200);
+                response.put("data",data);
+            }else{
+                response.put("status",201);
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+            response.put("status",500);
+            response.put("message",e.getMessage());
+        }
+        return response;
     }
 }

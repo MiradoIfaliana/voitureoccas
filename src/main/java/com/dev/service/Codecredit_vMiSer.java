@@ -16,5 +16,9 @@ public class Codecredit_vMiSer {
         if(lc.isEmpty()==true){ return null; }
         else{ return lc.get(0); }
     }
+    public List<Codecredit_vMi> getAll(){
+        List<Codecredit_vMi> lc=repository.findAll();
+        return lc;
+    }
 
 }

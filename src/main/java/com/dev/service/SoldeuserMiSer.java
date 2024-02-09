@@ -33,9 +33,23 @@ public class SoldeuserMiSer {
         }
         return tabs;
     }
+
+    public SoldeuserMi createSoldeIfNotExisteByIduser(int iduser){
+        List<SoldeuserMi> ls=repository.getSoldeByIduser(iduser);
+        if(ls.isEmpty()==true){ 
+            SoldeuserMi soldeuserMi2=new SoldeuserMi();
+            soldeuserMi2.setSolde(0);
+            soldeuserMi2.setDateupdate(Timestamp.valueOf(LocalDateTime.now()) );
+            soldeuserMi2.setIduser(iduser); 
+            return save(soldeuserMi2);
+        }else { return ls.get(0); }
+    
+    }
     public SoldeuserMi getSoldeByIduser(int iduser){
         List<SoldeuserMi> ls=repository.getSoldeByIduser(iduser);
-        if(ls.isEmpty()==true){ return null; }
+        if(ls.isEmpty()==true){ 
+            return createSoldeIfNotExisteByIduser(iduser);
+        }
         else { return ls.get(0);  }
     }
 
@@ -53,6 +67,7 @@ public class SoldeuserMiSer {
     public Optional<SoldeuserMi> getById(int id) {
         return repository.findById(id);
     }
+
     // Méthode pour supprimer un  par son ID
     public void delete(int id) {
         repository.deleteById(id);

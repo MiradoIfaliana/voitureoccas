@@ -1,8 +1,6 @@
 package com.dev.controller;
 
 import java.util.Hashtable;
-
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -10,12 +8,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.dev.config.JwtService;
-import com.dev.model.Note;
-import com.dev.model.user.User;
 import com.dev.service.UserService;
-
 import lombok.RequiredArgsConstructor;
 
 @RestController

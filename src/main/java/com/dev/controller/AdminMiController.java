@@ -18,7 +18,6 @@ import com.dev.models.*;
 import com.dev.service.AdminsMiSer;
 import com.dev.service.AnnonceMiSer;
 import com.dev.service.AnnoncedetailMi_vSer;
-import com.dev.service.AnnoncefavorisMiSer;
 import com.dev.service.ModelsMi_vSer;
 import com.dev.service.RegletauxMiSer;
 

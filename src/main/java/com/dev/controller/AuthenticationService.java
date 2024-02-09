@@ -30,23 +30,28 @@ public class   AuthenticationService {
 
     public Hashtable <String,Object> register(RegisterRequest request) {
         Hashtable <String,Object> registerResponse = new Hashtable<>();
-        var user = User.builder()
-            .nom(request.getFirstName())
-            .prenom(request.getLastname())
-            .mail(request.getMail())
-            .motdepasse(passwordEncoder.encode(request.getPassword()))
-            .date(Date.valueOf(request.getDtn()))
-            .role(Role.USER)
-            .build();
-        userRepository.save(user); 
-        var jwtToken = jwtService.generateToken(user);
-        AuthenticationResponse tokenObj =AuthenticationResponse.builder()
-            .token(jwtToken)
-            .build();
-
-        registerResponse.put("status" , 200);
-        registerResponse.put("message", "Compte créer !");
-        registerResponse.put("data", tokenObj);
+        try {
+            var user = User.builder()
+                .nom(request.getFirstName())
+                .prenom(request.getLastname())
+                .mail(request.getMail())
+                .motdepasse(passwordEncoder.encode(request.getPassword()))
+                .date(Date.valueOf(request.getDtn()))
+                .role(Role.USER)
+                .build();
+            userRepository.save(user); 
+            var jwtToken = jwtService.generateToken(user);
+            AuthenticationResponse tokenObj =AuthenticationResponse.builder()
+                .token(jwtToken)
+                .build();
+    
+            registerResponse.put("status" , 200);
+            registerResponse.put("message", "Compte créer !");
+            registerResponse.put("data", tokenObj);
+        } catch (Exception e) {
+            registerResponse.put("status" , 500);
+            registerResponse.put("message", e.getMessage());
+        }
 
         return registerResponse;
     } 

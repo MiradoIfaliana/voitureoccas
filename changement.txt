@@ -9,3 +9,13 @@
 --nanampy fonction getbyidmarque an'le marquemodels de ao @ controller
 --endpoint getVoitureInfoByIduser
 --endpoint getLieux
+
+--------------nanampy table userapptoken
+-->rep and ser + function save
+
+-->controller mandray token 2
+
+------------->nanampy endpoind usermir ---> getAllcodecredit +permit getAllcodecredit
+----->endpoint getSoldeuser
+
+------>soldeuser ---> create if not existe-

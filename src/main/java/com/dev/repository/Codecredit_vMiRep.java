@@ -22,4 +22,8 @@ public class Codecredit_vMiRep {
         String query="select * from codecredit_v where code = "+code+" and etats=0";
         return executerRequeteNative(query);
     }
+    public List<Codecredit_vMi> findAll() {
+        String query="select * from codecredit_v ";
+        return executerRequeteNative(query);
+    }
 }
