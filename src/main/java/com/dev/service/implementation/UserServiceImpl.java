@@ -114,6 +114,7 @@ public class UserServiceImpl implements UserService{
         UserMess connected=new UserMess();
         connected.setId(user.getId());
         connected.setNom(user.getNom());
+        connected.setPrenom(user.getPrenom());
         connected.setMail(user.getMail());
         Query query = new Query(Criteria.where("userSend").is(connected));
         List<Message> userSendList = mongoTemplate.find(query, Message.class);

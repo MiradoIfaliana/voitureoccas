@@ -67,7 +67,6 @@ public class   AuthenticationService {
             authenticationResponse.put("data", tokenObj);
         } 
         catch (Exception e) {
-            System.out.println(e.getMessage());
             authenticationResponse.put("status", 400);
             authenticationResponse.put("message", "Mot de passe ou mail incorectes !");
             authenticationResponse.put("data", "no data");
